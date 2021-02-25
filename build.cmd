@@ -1,0 +1,2 @@
+rem docker build --progress plain -t oracleinanutshell/oracle-xe-11g -f ..\docker-images\OracleDatabase\SingleInstance\dockerfiles\oracle-xe-11g\Dockerfile.xe ..\docker-images\OracleDatabase\SingleInstance\dockerfiles\oracle-xe-11g
+docker build --no-cache --progress plain -t db-apex-dev-xe-11g-image .
