@@ -8,6 +8,7 @@ disable_http(){
 enable_http(){
     echo "Turning on DBMS_XDB HTTP port"
     echo "EXEC DBMS_XDB.SETHTTPPORT(8080);" | ${ORACLE_HOME}/bin/sqlplus -s -l sys/${PASS} AS SYSDBA
+    echo "EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);" | ${ORACLE_HOME}/bin/sqlplus -s -l sys/${PASS} AS SYSDBA
 }
 
 apex_epg_config(){
@@ -40,11 +41,13 @@ apex_change_admin_pwd(){
     cd $ORACLE_HOME/apex
     echo "Changing APEX Admin Password"
 
-    APEX_SCHEMA=`sqlplus -s -l sys/${PASS} AS SYSDBA <<EOF
+    APEX_SCHEMA=`${ORACLE_HOME}/bin/sqlplus -s -l sys/${PASS} AS SYSDBA <<EOF
 SET PAGESIZE 0 FEEDBACK OFF VERIFY OFF HEADING OFF ECHO OFF
 SELECT ao.owner FROM all_objects ao WHERE ao.object_name = 'WWV_FLOW' AND ao.object_type = 'PACKAGE' AND ao.owner LIKE 'APEX_%';
 EXIT;
 EOF`
+    
+    echo "Use APEX schema ${APEX_SCHEMA}"
 
     echo "begin" > apxchpwd_custom.sql
     echo "    wwv_flow_security.g_security_group_id := 10;" >> apxchpwd_custom.sql
@@ -67,13 +70,15 @@ EOF
 apex_install_lang(){
     cd $ORACLE_HOME/apex/builder/${APEX_ADDITIONAL_LANG}
     echo "Installing APEX Language Pack ${APEX_ADDITIONAL_LANG}"
-    export NLS_LANG=AMERICAN_AMERICA.AL32UTF8;
+    export NLS_LANG=AMERICAN_AMERICA.AL32UTF8
 
-    APEX_SCHEMA=`sqlplus -s -l sys/${PASS} AS SYSDBA <<EOF
+    APEX_SCHEMA=`${ORACLE_HOME}/bin/sqlplus -s -l sys/${PASS} AS SYSDBA <<EOF
 SET PAGESIZE 0 FEEDBACK OFF VERIFY OFF HEADING OFF ECHO OFF
 SELECT ao.owner FROM all_objects ao WHERE ao.object_name = 'WWV_FLOW' AND ao.object_type = 'PACKAGE' AND ao.owner LIKE 'APEX_%';
 EXIT;
 EOF`
+
+    echo "Use APEX schema ${APEX_SCHEMA}"
 
     ${ORACLE_HOME}/bin/sqlplus -s -l sys/${PASS} AS SYSDBA <<EOF
 ALTER SESSION SET CURRENT_SCHEMA=${APEX_SCHEMA};
