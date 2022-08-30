@@ -1,6 +1,6 @@
 FROM oracleinanutshell/oracle-xe-11g
 
-MAINTAINER Raphael Hinterndorfer <dev@rammelhof.at>
+LABEL MAINTAINER="Raphael Hinterndorfer <dev@rammelhof.at>"
 
 # environment variables
 ENV ORACLE_SID=xe \

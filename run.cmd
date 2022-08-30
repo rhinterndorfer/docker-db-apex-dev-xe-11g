@@ -1,1 +1,1 @@
-docker run -d --name db-apex-dev-xe-11g-container -p 1521:1521 -p 8080:8080 db-apex-dev-xe-11g-image
+docker run -d --name db-apex-dev-xe-11g-container -p 8080:8080 -p 1521:1521 db-apex-dev-xe-11g-image
