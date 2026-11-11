@@ -9,6 +9,6 @@ apex_uninstall(){
 
 
 echo "Uninstalling APEX in DB: ${ORACLE_SID}"
-. /home/oracle/.bash_profile
+#. /home/oracle/.bash_profile
 apex_uninstall
 cd /

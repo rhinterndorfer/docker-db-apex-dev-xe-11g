@@ -145,7 +145,7 @@ install_apex_patch(){
 }
 
 echo "Installing APEX in DB: ${ORACLE_SID}"
-. /home/oracle/.bash_profile
+#. /home/oracle/.bash_profile
 unzip_apex
 enable_http
 apex_create_tablespace

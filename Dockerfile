@@ -8,7 +8,7 @@ ENV ORACLE_SID=xe \
     ORACLE_BASE=/u01/app/oracle \
     ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe \
     PASS=oracle \
-    APEX_PASS=OrclAPEX2021! \
+    APEX_PASS=OrclAPEX2026! \
     APEX_ADDITIONAL_LANG=de \
     APEX_PATCH_SET_BUNDLE_FILE=
     

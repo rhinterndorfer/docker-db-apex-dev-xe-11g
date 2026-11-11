@@ -27,6 +27,6 @@ EOF
 
 
 echo "Configure DB: ${ORACLE_SID}"
-. /home/oracle/.bash_profile
+#. /home/oracle/.bash_profile
 config_db
 cd /
